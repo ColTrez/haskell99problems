@@ -1,4 +1,5 @@
 import System.Random
+import Data.List
 
 -- problem 1
 myLast :: [a] -> a
@@ -159,3 +160,13 @@ rangeBetween :: Int -> Int -> [Int]
 rangeBetween a b | a == b    = [a]
                  | a > b     = [b]
                  | otherwise = a : rangeBetween (succ a) b
+
+--problem 25
+shuffle :: [a] -> StdGen -> [a]
+shuffle as gen = let n = length as
+                     rands = take n $ randoms gen :: [Int]
+                     pairs = zip as rands
+                  in map fst $ sortOn snd pairs 
+
+--rndPerm :: [a] -> StdGen -> [a]
+--rndPerm xs gen = 
